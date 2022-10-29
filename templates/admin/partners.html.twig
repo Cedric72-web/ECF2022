@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="p-5 text-center">Liste des salles</h1>
     <div class="col-lg-10 mx-auto">
-        {# <a href="{{ path('salle_nouvelle_salle') }}" class="mx-5"> #}
+        <a href="{{ path('admin_nouvelle_salle') }}" class="mx-5">
             <button class="btn btn-primary my-5">Créer une nouvelle salle</button>
         </a>
         <a href="{{ path('admin_index') }}" class="mx-5">
@@ -36,7 +36,7 @@
                         <td>{{ partner.city }}</td>
                         <td>{{ partner.email }}</td>
                         <td>
-                            {% if partner.isIsActivate == 0 %}
+                            {% if partner.isActivate == 0 %}
                                 Non activée
                             {% else %}
                                 Activée

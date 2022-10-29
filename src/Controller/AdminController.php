@@ -6,10 +6,12 @@ use DateTime;
 use App\Entity\User;
 use App\Entity\Module;
 use App\Entity\Franchise;
+use App\Entity\Partner;
 use App\Form\NewUserType;
 use App\Form\NewModuleType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
+use App\Form\NewPartnerType;
 use App\Repository\UserRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\PartnerRepository;
@@ -152,7 +154,25 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
+    #[Route('/partner/new', name:'nouvelle_salle')]
+    public function newPartner(UserPasswordHasherInterface $userPasswordHasher, Request $request, ManagerRegistry $doctrine)
+    {
+        $partner = new Partner($userPasswordHasher);
+
+        $form = $this->createForm(NewPartnerType::class, $partner);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($partner);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("admin_salles");
+        }
+        return $this->render('admin/newpartner.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     // *** MODULES ***
     #[Route('/modules', name: 'modules')]

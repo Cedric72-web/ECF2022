@@ -78,7 +78,7 @@ class NewPartnerType extends AbstractType
                 ],
                 'choice_label' => 'name'
             ])
-            ->add('is_activate', ChoiceType::class, [
+            ->add('activate', ChoiceType::class, [
                 'choices' => [
                     'Activée' => true,
                     'Non activée' => false,

@@ -7,9 +7,10 @@ use App\Repository\PartnerRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
-class Partner
+class Partner implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
