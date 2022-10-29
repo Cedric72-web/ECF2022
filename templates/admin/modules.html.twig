@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="p-5 text-center">Liste des modules</h1>
     <div class="col-lg-10 mx-auto">
-        {# <a href="{{ path('module_nouveau_module') }}" class="mx-5"> #}
+        <a href="{{ path('admin_nouveau_module') }}" class="mx-5">
             <button class="btn btn-primary my-5">Créer un nouveau module</button>
         </a>
         <a href="{{ path('admin_index') }}" class="mx-5">
@@ -15,8 +15,8 @@
             <thead class="text-center">
                 <th>Id</th>
                 <th>Name</th>
-                <th>Actions</th>
                 <th>Status</th>
+                <th>Actions</th>
             </thead>
             <tbody class="text-center">
                 {% for module in modules %}
@@ -24,7 +24,7 @@
                         <td>{{ module.id }}</td>
                         <td>{{ module.name }}</td>
                         <td>
-                            {% if module.isIsActivate == 0 %}
+                            {% if module.isActivate == 0 %}
                                 Non activé
                             {% else %}
                                 Activé

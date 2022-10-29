@@ -4,13 +4,15 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Module;
 use App\Entity\Franchise;
+use App\Form\NewModuleType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
 use App\Repository\UserRepository;
+use App\Repository\ModuleRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\FranchiseRepository;
-use App\Repository\ModuleRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -134,5 +136,26 @@ class AdminController extends AbstractController
         return $this->render('admin/modules.html.twig', [
             'modules' => $modules->findAll(),
         ]);
+    }
+
+    #[Route('module/new', name: 'nouveau_module')]
+    public function newModule(Request $request, ManagerRegistry $doctrine):Response
+    {
+        $module = new Module;
+
+        $form = $this->createForm(NewModuleType::class, $module);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($module);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("admin_modules");
+        }
+        return $this->render('admin/newmodule.html.twig', [
+            "form" => $form->createview(),
+        ]);        
     }
 }
