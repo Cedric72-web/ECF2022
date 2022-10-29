@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\User;
 use App\Entity\Module;
-use App\Entity\Franchise;
 use App\Entity\Partner;
+use App\Entity\Franchise;
 use App\Form\NewUserType;
+use App\Form\EditUserType;
 use App\Form\NewModuleType;
+use App\Form\NewPartnerType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
-use App\Form\NewPartnerType;
 use App\Repository\UserRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\PartnerRepository;
@@ -137,11 +137,34 @@ class AdminController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('message', 'Utilisateur ajouté avec succès');
             return $this->redirectToRoute("admin_utilisateurs");
         }
         return $this->render('admin/newuser.html.twig', [
             "form" => $form->createview(),
         ]);        
+    }
+
+    #[Route('user/edit/{id}', name:'modifier_utilisateur')]
+    public function editUser(Request $request, ManagerRegistry $doctrine, User $user)
+    {
+        $form = $this->createForm(EditUserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form ->isValid())
+        {
+            $username = $user->getLastname() . " " . $user->getFirstname();
+            $user->setUsername($username);
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Utilisateur modifié avec succès');
+            return $this->redirectToRoute("admin_utilisateurs");
+        }
+        return $this->render('admin/newuser.html.twig', [
+            "form" => $form->createview(),
+        ]); 
     }
     
     // *** SALLES ***

@@ -25,9 +25,9 @@
                         <td>{{ module.name }}</td>
                         <td>
                             {% if module.isActivate == 0 %}
-                                Non activé
+                                <p class="text-danger">Non activé</p>
                             {% else %}
-                                Activé
+                                <p class="text-success">Activé</p>
                             {% endif %}
                             
                         </td>

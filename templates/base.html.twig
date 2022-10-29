@@ -64,6 +64,11 @@
 
     <!-- Start Main -->
     <main class="container-fluid py-5 mx-auto min-vh-100">
+    {% for message in app.flashes('message') %}
+      <div class="col-lg-10 text-center alert alert-success" role="alert">
+          {{ message }}
+      </div>
+    {% endfor %}
       {% block body %}{% endblock %}
     </main>
     <!-- End Main -->

@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modifier l'utilisateur{% endblock %}
+
+{% block body %}
+    <div class="col-lg-4 mx-auto">
+        <h1 class="p-5 text-center fx-bold">Modifier l'utilisateur</h1>
+        {{ form_start(userForm, {'attr': {'class': 'container'}}) }}
+        {{ form_rest(userForm) }}
+        <input type="submit" class="btn btn-success mt-3 mx-1" value="Valider">
+        <a href="{{ path('admin_utilisateurs') }}" class="btn btn-danger mt-3 mx-1">Annuler</a>
+    </div>
+{% endblock %}

@@ -37,9 +37,9 @@
                         <td>{{ partner.email }}</td>
                         <td>
                             {% if partner.isActivate == 0 %}
-                                Non activée
+                                <p class="text-danger">Non activée</p>
                             {% else %}
-                                Activée
+                                <p class="text-success">Activée</p>
                             {% endif %}
                             
                         </td>
