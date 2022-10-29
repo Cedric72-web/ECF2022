@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un utilisateur{% endblock %}
+
+{% block main %}
+    <div class="col-lg-4 mx-auto">
+        <h1 class="p-5 text-center fx-bold">Ajouter un utilisateur</h1>
+        {{ form_start(form, {'attr': {'class': 'container'}}) }}
+        {{ form_rest(form) }}
+        <input type="submit" class="btn btn-success mt-3 mx-1" value="Valider">
+        <a href="{{ path('admin_utilisateurs') }}" class="btn btn-danger mt-3 mx-1">Annuler</a>
+    </div>
+{% endblock %}

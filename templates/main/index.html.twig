@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+        <h1 class="text-center text-success fw-bold pt-5">Bienvenue {{ app.user.username }}</h1>
+        <h2 class="text-center text-success fw-bold pt-5">Vous avez le rôle  {{ app.user.roles[1] }}</h2>
+    {% else %}
+        <!-- Start Home Section -->
+        <section id="home">
+            <div class="container pt-5">
+                <h1 class="fw-bold text-success text-center mb-5">Bienvenue sur Fit Park</h1>
+            </div>
+            <div class="card border-light mb-3 col-md-10 col-lg-8 col-xxl-6 mx-auto">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex">
+                    <img src={{ asset('images/image1.jpg') }} class="img-fluid w-100 rounded vertical-align-center mx-auto my-auto" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Les nouvelles salles de fitness...</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas, delectus culpa. Eligendi sed odio accusantium quod tempora? Labore doloremque sit laboriosam, eaque in officiis rem libero reprehenderit corporis. Voluptas sunt assumenda obcaecati dolor qui odio minus, sed autem explicabo? Omnis laboriosam blanditiis doloribus voluptate id fuga fugit minus, ipsam animi eum facere exercitationem dolores recusandae! Voluptatum quia repellat quam molestias quas, odio provident laborum aliquid modi delectus mollitia dolor doloribus enim ullam nostrum repudiandae non, nemo aut labore sapiente eaque odit accusantium iure tenetur! Nulla, blanditiis consequuntur voluptatem earum, distinctio dolorem iste a repudiandae, consectetur ex perferendis facilis iusto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-light mb-3 col-md-10 col-lg-8 col-xxl-6 mx-auto my-5">
+                <div class="row g-0 flex-row-reverse">
+                    <div class="col-md-4 d-flex">
+                    <img src={{ asset('images/image2.jpg') }} class="img-fluid w-100 vertical-align-center rounded mx-auto my-auto" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Une chaîne de salles de sport...</h5>
+                            <p class="card-text overflow-hidden">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas, delectus culpa. Eligendi sed odio accusantium quod tempora? Labore doloremque sit laboriosam, eaque in officiis rem libero reprehenderit corporis. Voluptas sunt assumenda obcaecati dolor qui odio minus, sed autem explicabo? Omnis laboriosam blanditiis doloribus voluptate id fuga fugit minus, ipsam animi eum facere exercitationem dolores recusandae! Voluptatum quia repellat quam molestias quas, odio provident laborum aliquid modi delectus mollitia dolor doloribus enim ullam nostrum repudiandae non, nemo aut labore sapiente eaque odit accusantium iure tenetur! Nulla, blanditiis consequuntur voluptatem earum, distinctio dolorem iste a repudiandae, consectetur ex perferendis facilis iusto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card border-light mb-3 col-md-10 col-lg-8 col-xxl-6 mx-auto my-5">
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex">
+                    <img src={{ asset('images/image3.jpg') }} class="img-fluid w-100 vertical-align-center rounded mx-auto my-auto" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h3 class="card-title">Du matériel à la pointe de la technologie...</h5>
+                            <p class="card-text overflow-hidden">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas, delectus culpa. Eligendi sed odio accusantium quod tempora? Labore doloremque sit laboriosam, eaque in officiis rem libero reprehenderit corporis. Voluptas sunt assumenda obcaecati dolor qui odio minus, sed autem explicabo? Omnis laboriosam blanditiis doloribus voluptate id fuga fugit minus, ipsam animi eum facere exercitationem dolores recusandae! Voluptatum quia repellat quam molestias quas, odio provident laborum aliquid modi delectus mollitia dolor doloribus enim ullam nostrum repudiandae non, nemo aut labore sapiente eaque odit accusantium iure tenetur! Nulla, blanditiis consequuntur voluptatem earum, distinctio dolorem iste a repudiandae, consectetur ex perferendis facilis iusto.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Home Section -->
+
+        <!-- Start Franchise Section -->
+        <section id="franchise">
+            <div class="container pt-5">
+                <h2 class="fw-bold text-success text-center">La franchise</h1>
+            </div>
+            <div class="presentation container text-center py-5">
+                <h3>Une équipe spécialisée pour vous aider à vous installer le plus vite possible.</h3>
+                <p class="text-center py-5">
+                    De la signature du contrat de franchise, jusqu'à l'ouverture de votre salle, des juristes, des comptables, des spécialistes de l'agencement, sont  à votre disponibilité, afin de vous faciliter les démarches et le suivi de votre projet.
+                </p>
+                <img src={{ asset('images/staff.jpg') }} alt="" class="rounded image-fluid w-100">
+                <p class="container texte-center">
+                    Une équipe entièrement dédiée pour vous. Vous avez toujours les mêmes contacts, du début à la fin du processus.<br>Et même après...
+                </p>
+                <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Contactez-nous</a>
+            </div>
+        </section>
+        <!-- End Franchise Section -->
+
+        <!-- Start About Section -->
+        <section id="about">
+            <div class="container pt-5">
+                <h2 class="fw-bold text-success text-center">A propos de Fit Park</h1>
+            </div>
+            <div class="container text-center py-5">
+                <h3>Une enseigne depuis 1998...</h3>
+                <img src={{ asset('images/about.jpg') }} alt="" class="rounded image-fluid w-100">
+                <p class="text-center py-5">
+                    La première salle de fitness <span class="fw-bold">Fit Park</span>, a vu le jour en 1998. Depuis, nous nous sommes implentés dans les plus grandes villes de France, afin de proposer le meilleur du Fitness à nos clients.<br>C'est dans cet optique, que nous cherchons toujours les meilleur matériel, et les meilleurs coachs.
+                </p>
+                <a href="" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Contactez-nous</a>
+            </div>
+        </section>
+        <!-- End About Section -->
+        
+        <!-- Start Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title text-success fs-5" id="staticBackdropLabel">Contactez-nous</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="mail" class="form-label">Votre adresse email :</label>
+                        <input type="email" class="form-control" id="mail" placeholder="monadresse@email.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="question" class="form-label">Votre demande :</label>
+                        <textarea class="form-control" id="question" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success">Soumettre</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+    {% endif %}
+{% endblock %}

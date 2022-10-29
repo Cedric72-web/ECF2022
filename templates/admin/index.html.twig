@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <h1 class="p-5 text-center fw-bold">Panel d'administration</h1>
+    <div class="col-lg-10 d-flex flex-wrap justify-content-between text-center mx-auto my-5">
+        <div class="row col-10 mx-auto user">
+            <h3 class="fw-bold">Utilisateurs</h3>
+            <a href="{{ path('admin_utilisateurs') }}" role="button" class="nav-link my-5">
+                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
+                    <div class="card-body">
+                        <i class="bi bi-search fs-2"></i>
+                        <p class="card-title fs-6">Vue des<br> utilisateurs</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row col-10 mx-auto franchise">
+            <h3 class="fw-bold">Franchise</h3>
+            <a href="{{ path('admin_franchises') }}" role="button" class="nav-link my-5">
+                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
+                    <div class="card-body">
+                        <i class="bi bi-search fs-2"></i>
+                        <p class="card-title fs-6">Vue des<br> franchises</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row col-10 mx-auto salle">
+            <h3 class="fw-bold">Salle</h3>
+            <a href="{{ path('admin_salles') }}" role="button" class="nav-link my-5">
+                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
+                    <div class="card-body">
+                        <i class="bi bi-search fs-2"></i>
+                        <p class="card-title fs-6">Vue des<br> salles</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row col-10 mx-auto module">
+            <h3 class="fw-bold">Module</h3>
+            <a href="{{ path('admin_modules') }}" role="button" class="nav-link my-5">
+                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
+                    <div class="card-body">
+                        <i class="bi bi-search fs-2"></i>
+                        <p class="card-title fs-6">Vue des<br> modules</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}

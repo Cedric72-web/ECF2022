@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fit Park | {% block title %}{% endblock %}</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        <!-- CSS Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {{ encore_entry_script_tags('app') }}
+    <!-- JavaScript Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    {% block javascripts %}{% endblock %}
+    {# <script src="{{ asset('scripts/functions.js') }}" defer></script> #}
+        
+    
+  </head>
+  <body class="max-vh-100">
+    <!-- Start Navbar -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg bg-dark navbar-dark justify-content-around fixed-top w-100">
+        <div class="container-fluid text-capitalize">
+          <a class="navbar-brand text-success fw-bold" href="/">Fit Park</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#franchise">Franchise</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">à propos</a>
+              </li>
+              <li>
+                {% if app.user %}
+                  <a href="{{ path('logout') }}" class="nav-link text-light me-3 fw-bold">Se déconnecter</a>
+                  {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{ path('admin_index') }}">administration</a>
+                    </li>
+                  {% endif %}
+                  {% else %}
+                  <a href="{{ path('login') }}" class="nav-link text-light me-3 fw-bold">Se connecter</a>
+                {% endif %}
+              </li>
+            </ul>
+            {% if app.user %}
+              <p class="text-light">Connecté en tant que : {{ app.user.userIdentifier }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- End Navbar -->
+
+    <!-- Start Main -->
+    <main class="container-fluid py-5 mx-auto min-vh-100">
+      {% block body %}{% endblock %}
+    </main>
+    <!-- End Main -->
+
+    <!-- Start Footer -->
+    <footer class="bg-dark text-center text-success" id="footer">
+      <div class="container p-4">
+        <!-- Start Section Social Media -->
+        <section class="mb-4">
+          <a class="btn btn-outline-success btn-floating m-1" href="#!" role="button">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a class="btn btn-outline-success btn-floating m-1" href="#!" role="button">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a class="btn btn-outline-success btn-floating m-1" href="#!" role="button">
+            <i class="bi bi-twitter"></i>
+          </a>
+        </section>
+        <!-- End Section Social Media -->
+
+        <!-- Start Section Contact -->
+        <section class="text-center p-3">
+          <a class="btn btn-outline-success" role="button" href="#">Contactez-nous</a>
+        </section>
+        <!-- End Section Contact -->
+        <section class="mb-4">
+          <p class="text-center">&copy Fit Park - 2022</p>
+        </section>
+      </div>
+    </footer>
+    <!-- End Footer -->
+  </body>
+</html>

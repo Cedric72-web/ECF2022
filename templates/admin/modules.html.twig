@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des modules{% endblock %}
+
+{% block body %}
+    <h1 class="p-5 text-center">Liste des modules</h1>
+    <div class="col-lg-10 mx-auto">
+        {# <a href="{{ path('module_nouveau_module') }}" class="mx-5"> #}
+            <button class="btn btn-primary my-5">Créer un nouveau module</button>
+        </a>
+        <a href="{{ path('admin_index') }}" class="mx-5">
+            <button class="btn btn-success my-5">Retour au panel d'administration</button>
+        </a>
+        <table class="table table-striped table-info col-lg-10">
+            <thead class="text-center">
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+                <th>Status</th>
+            </thead>
+            <tbody class="text-center">
+                {% for module in modules %}
+                    <tr>
+                        <td>{{ module.id }}</td>
+                        <td>{{ module.name }}</td>
+                        <td>
+                            {% if module.isIsActivate == 0 %}
+                                Non activé
+                            {% else %}
+                                Activé
+                            {% endif %}
+                            
+                        </td>
+                        <td>
+                            {# <a href="{{ path('module_modifier_module', {'id': module.id}) }}" class="btn btn-warning mx-1">Modifier</a>
+                            <a href="{{ path('module_supprimer_module', {'id': module.id}) }}" class="btn btn-danger mx-1">Supprimer</a> #}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan=5>Il n'y a pas d'utilisateur inscrit</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
