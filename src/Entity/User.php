@@ -233,6 +233,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setUsername(string $username): self
     {
+        $username = $this->lastname . " " . $this->firstname;
         $this->username = $username;
 
         return $this;

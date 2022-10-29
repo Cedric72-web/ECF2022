@@ -6,6 +6,7 @@ use DateTime;
 use App\Entity\User;
 use App\Entity\Module;
 use App\Entity\Franchise;
+use App\Form\NewUserType;
 use App\Form\NewModuleType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
@@ -36,7 +37,6 @@ class AdminController extends AbstractController
     #[Route('/franchises', name: 'franchises')]
     public function listFranchises(FranchiseRepository $franchisesRepo, PartnerRepository $partnerRepo): Response
     {
-        // Récupération de toutes les salles
         return $this->render("admin/franchises.html.twig", [
             'franchises' => $franchisesRepo->findAll(),
             'partners' => $partnerRepo->findAll()
@@ -118,6 +118,29 @@ class AdminController extends AbstractController
             'users' => $users->findAll(),
         ]);
     }
+
+    #[Route('user/new', name: 'nouvel_utilisateur')]
+    public function newUser(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher):Response
+    {
+        $user = new User($userPasswordHasher);
+
+        $form = $this->createForm(NewUserType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $username = $user->getLastname() . " " . $user->getFirstname();
+            $user->setUsername($username);
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("admin_utilisateurs");
+        }
+        return $this->render('admin/newuser.html.twig', [
+            "form" => $form->createview(),
+        ]);        
+    }
     
     // *** SALLES ***
     
@@ -128,6 +151,8 @@ class AdminController extends AbstractController
             'partners' => $partners->findAll(),
         ]);
     }
+
+    
 
     // *** MODULES ***
     #[Route('/modules', name: 'modules')]
