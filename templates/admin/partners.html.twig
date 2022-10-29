@@ -46,9 +46,9 @@
                         <td>{{ partner.getOwner.username }}</td>
                         <td>{{ partner.getFranchise.name }}</td>
                         <td>
-                            {# <a href="{{ path('salle_voir_salle', {'id': partner.id}) }}" class="btn btn-success mx-1">Voir la fiche</a>
-                            <a href="{{ path('salle_modifier_salle', {'id': partner.id}) }}" class="btn btn-warning mx-1">Modifier</a>
-                            <a href="{{ path('salle_supprimer_salle', {'id': partner.id}) }}" class="btn btn-danger mx-1">Supprimer</a> #}
+                            {# <a href="{{ path('salle_voir_salle', {'id': partner.id}) }}" class="btn btn-success mx-1">Voir la fiche</a> #}
+                            <a href="{{ path('admin_modifier_salle', {'id': partner.id}) }}" class="btn btn-warning mx-1">Modifier</a>
+                            <a href="{{ path('admin_supprimer_salle', {'id': partner.id}) }}" class="btn btn-danger mx-1">Supprimer</a>
                         </td>
                     </tr>
                 {% else %}

@@ -12,6 +12,7 @@ use App\Form\NewModuleType;
 use App\Form\NewPartnerType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
+use App\Form\EditPartnerType;
 use App\Repository\UserRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\PartnerRepository;
@@ -81,8 +82,11 @@ class AdminController extends AbstractController
     }
     
     #[Route('/franchise/edit/{id}', name: 'modifier_franchise')]
-    public function editFranchise(Franchise $franchise, Request $request, ManagerRegistry $doctrine)
+    public function editFranchise(Franchise $franchise, Request $request, ManagerRegistry $doctrine, $id)
     {
+        $franchise = $doctrine->getRepository(Franchise::class);
+        $franchise = $franchise->find($id);
+
         $form = $this->createForm(EditFranchiseType::class, $franchise);
         $form->handleRequest($request);
 
@@ -92,8 +96,8 @@ class AdminController extends AbstractController
             $entityManager->persist($franchise);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Utilisateur modifié avec succès');
-            return $this->redirectToRoute('admin_franchise');
+            $this->addFlash('message', 'Franchise modifiée avec succès');
+            return $this->redirectToRoute('admin_franchises');
         }
 
         return $this->render('admin/editfranchise.html.twig', [
@@ -102,13 +106,17 @@ class AdminController extends AbstractController
     }
 
     #[Route('/franchise/delete/{id}', name: 'supprimer_franchise')]
-    public function deleteFranchise(Franchise $franchise, ManagerRegistry $doctrine): Response
+    public function deleteFranchise(Franchise $franchise, ManagerRegistry $doctrine, $id): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $franchise = $doctrine->getRepository(Franchise::class);
+        $franchise = $franchise->find($id);
+
         $entityManager = $doctrine->getManager();
         $entityManager->remove($franchise);
         $entityManager->flush();
-        return $this->redirectToRoute(('admin_franchise'));
+
+        $this->addFlash('message', 'Franchise supprimée avec succès');
+        return $this->redirectToRoute(('admin_franchises'));
     }
 
     // *** UTILISATEURS ***
@@ -146,8 +154,11 @@ class AdminController extends AbstractController
     }
 
     #[Route('user/edit/{id}', name:'modifier_utilisateur')]
-    public function editUser(Request $request, ManagerRegistry $doctrine, User $user)
+    public function editUser(Request $request, ManagerRegistry $doctrine, User $user, $id)
     {
+        $user = $doctrine->getRepository(User::class);
+        $user = $user->find($id);
+
         $form = $this->createForm(EditUserType::class, $user);
         $form->handleRequest($request);
 
@@ -162,9 +173,23 @@ class AdminController extends AbstractController
             $this->addFlash('message', 'Utilisateur modifié avec succès');
             return $this->redirectToRoute("admin_utilisateurs");
         }
-        return $this->render('admin/newuser.html.twig', [
-            "form" => $form->createview(),
+        return $this->render('admin/edituser.html.twig', [
+            "userForm" => $form->createview(),
         ]); 
+    }
+    
+    #[Route('/user/delete/{id}', name: 'supprimer_utilisateur')]
+    public function deleteUser(User $user, ManagerRegistry $doctrine, $id): Response
+    {
+        $user = $doctrine->getRepository(User::class);
+        $user = $user->find($id);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('message', 'Utilisateur supprimé avec succès');
+        return $this->redirectToRoute(('admin_utilisateurs'));
     }
     
     // *** SALLES ***
@@ -196,6 +221,43 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    
+    #[Route('partner/edit/{id}', name:'modifier_salle')]
+    public function editPartner(Request $request, ManagerRegistry $doctrine, Partner $partner, $id)
+    {
+        $partner = $doctrine->getRepository(Partner::class);
+        $partner = $partner->find($id);
+
+        $form = $this->createForm(EditPartnerType::class, $partner);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form ->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($partner);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Salle modifiée avec succès');
+            return $this->redirectToRoute("admin_salles");
+        }
+        return $this->render('admin/editpartner.html.twig', [
+            "partnerForm" => $form->createview(),
+        ]); 
+    }
+    
+    #[Route('/partner/delete/{id}', name: 'supprimer_salle')]
+    public function deletePartner(Partner $partner, ManagerRegistry $doctrine, $id): Response
+    {
+        $partner = $doctrine->getRepository(Partner::class);
+        $partner = $partner->find($id);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($partner);
+        $entityManager->flush();
+        
+        $this->addFlash('message', 'Salle supprimée avec succès');
+        return $this->redirectToRoute(('admin_salles'));
+    }
 
     // *** MODULES ***
     #[Route('/modules', name: 'modules')]
@@ -225,5 +287,19 @@ class AdminController extends AbstractController
         return $this->render('admin/newmodule.html.twig', [
             "form" => $form->createview(),
         ]);        
+    }
+    
+    #[Route('/user/module/{id}', name: 'supprimer_module')]
+    public function deleteModule(Module $module, ManagerRegistry $doctrine, $id): Response
+    {
+        $module = $doctrine->getRepository(User::class);
+        $module = $module->find($id);
+
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($module);
+        $entityManager->flush();
+        
+        $this->addFlash('message', 'Module supprimé avec succès');
+        return $this->redirectToRoute(('admin_utilisateurs'));
     }
 }

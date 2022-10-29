@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FranchiseRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: FranchiseRepository::class)]
@@ -35,7 +35,7 @@ class Franchise implements PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'franchise', targetEntity: Partner::class)]
     private Collection $partners;
 
-    public function __construct(UserPasswordHasher $passwordHasher)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
         $this->partners = new ArrayCollection();

@@ -7,6 +7,7 @@ use App\Repository\PartnerRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: PartnerRepository::class)]
@@ -47,7 +48,7 @@ class Partner implements PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: ModuleStructure::class, mappedBy: 'partner')]
     private Collection $moduleStructures;
 
-    public function __construct(UserPasswordHasher $passwordHasher)
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
         $this->moduleStructures = new ArrayCollection();

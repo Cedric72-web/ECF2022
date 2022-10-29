@@ -51,10 +51,6 @@
                             <a href="{{ path('admin_voir_franchise', {'id': franchise.id}) }}" class="btn btn-success mx-1">Voir la fiche</a>
                             <a href="{{ path('admin_modifier_franchise', {'id': franchise.id}) }}" class="btn btn-warning mx-1">Modifier</a>
                             <a href="{{ path('admin_supprimer_franchise', {'id': franchise.id}) }}" class="btn btn-danger mx-1">Supprimer</a>
-                            {% if franchise.isActivate == 0 %}
-                                <a href="" class="btn btn-success mx-1">Activer ?</a>
-                            {% endif %}
-                            
                         </td>
                     </tr>
                 {% else %}
