@@ -33,7 +33,7 @@
                         </td>
                         <td>
                             {# <a href="{{ path('module_modifier_module', {'id': module.id}) }}" class="btn btn-warning mx-1">Modifier</a>
-                            <a href="{{ path('module_supprimer_module', {'id': module.id}) }}" class="btn btn-danger mx-1">Supprimer</a> #}
+                            <a href="{{ path('module_supprimer_module', {'id': module.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ user.username }} ?')) { return false; }" class="btn btn-danger mx-1">Supprimer</a> #}
                         </td>
                     </tr>
                 {% else %}

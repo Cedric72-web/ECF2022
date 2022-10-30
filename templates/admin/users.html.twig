@@ -42,7 +42,7 @@
                         <td>{{ user.createdAt | date("d/m/Y") }} à {{ user.createdAt | date("H:i") }}</td>
                         <td>
                             <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-warning mx-1">Modifier</a>
-                            <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" class="btn btn-danger mx-1">Supprimer</a>
+                            <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ user.username }} ?')) { return false; }" class="btn btn-danger mx-1">Supprimer</a>
                         </td>
                     </tr>
                 {% else %}
