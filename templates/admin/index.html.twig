@@ -3,51 +3,41 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    <h1 class="p-5 text-center fw-bold">Panel d'administration</h1>
-    <div class="col-lg-10 d-flex flex-wrap justify-content-between text-center mx-auto my-5">
-        <div class="row col-6 mx-auto user">
-            <h3 class="fw-bold">Utilisateurs</h3>
-            <a href="{{ path('admin_utilisateurs') }}" role="button" class="nav-link my-5">
-                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
-                    <div class="card-body">
-                        <i class="bi bi-search fs-2"></i>
-                        <p class="card-title fs-6">Vue des<br> utilisateurs</p>
-                    </div>
-                </div>
-            </a>
+    <h1 class="py-3 text-center fw-bold">Panel d'administration</h1>
+    <div class="card border-success mb-4 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Utilisateurs</h5>
+            <p class="card-text">Il y a actuellement {{ users }} utilisateur(s)</p>
+            <div class="card-footer text-end bg-transparent border-success">
+                <a href="{{ path('admin_utilisateurs') }}" class="btn btn-primary text-end border-dark bg-dark">Voir tous les utilisateurs</a>
+            </div>
         </div>
-        <div class="row col-6 mx-auto franchise">
-            <h3 class="fw-bold">Franchise</h3>
-            <a href="{{ path('admin_franchises') }}" role="button" class="nav-link my-5">
-                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
-                    <div class="card-body">
-                        <i class="bi bi-search fs-2"></i>
-                        <p class="card-title fs-6">Vue des<br> franchises</p>
-                    </div>
-                </div>
-            </a>
+    </div>
+    <div class="card border-success mb-4 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Franchises</h5>
+            <p class="card-text">Il y a actuellement {{ franchises }} franchise(s)</p>
+            <div class="card-footer text-end bg-transparent border-success">
+                <a href="{{ path('admin_franchises') }}" class="btn btn-primary text-end border-dark bg-dark">Voir toutes les franchises</a>
+            </div>
         </div>
-        <div class="row col-6 mx-auto salle">
-            <h3 class="fw-bold">Salle</h3>
-            <a href="{{ path('admin_salles') }}" role="button" class="nav-link my-5">
-                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
-                    <div class="card-body">
-                        <i class="bi bi-search fs-2"></i>
-                        <p class="card-title fs-6">Vue des<br> salles</p>
-                    </div>
-                </div>
-            </a>
+    </div>
+    <div class="card border-success mb-4 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Salles</h5>
+            <p class="card-text">Il y a actuellement {{ partners }} salle(s)</p>
+            <div class="card-footer text-end bg-transparent border-success">
+                <a href="{{ path('admin_salles') }}" class="btn btn-primary text-end border-dark bg-dark">Voir toutes les salles</a>
+            </div>
         </div>
-        <div class="row col-6 mx-auto module">
-            <h3 class="fw-bold">Module</h3>
-            <a href="{{ path('admin_modules') }}" role="button" class="nav-link my-5">
-                <div class="card rounded-pill col-4 m-3 mx-auto border-dark border border-2 bg-secondary bg-gradient text-dark">
-                    <div class="card-body">
-                        <i class="bi bi-search fs-2"></i>
-                        <p class="card-title fs-6">Vue des<br> modules</p>
-                    </div>
-                </div>
-            </a>
+    </div>
+    <div class="card border-success mb-4 col-lg-8 mx-auto">
+        <div class="card-body">
+            <h5 class="card-title">Modules</h5>
+            <p class="card-text">Il y a actuellement {{ modules }} module(s)</p>
+            <div class="card-footer text-end bg-transparent border-success">
+                <a href="{{ path('admin_modules') }}" class="btn btn-primary text-end border-dark bg-dark">Voir tous les modules</a>
+            </div>
         </div>
     </div>
 {% endblock %}

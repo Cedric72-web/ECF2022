@@ -28,10 +28,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(UserRepository $userRepo, FranchiseRepository $franchisesRepo, PartnerRepository $partnersRepo, ModuleRepository $modulesRepo): Response
     {
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
+            'users' => count($userRepo->findAll()),
+            'franchises' => count($franchisesRepo->findAll()),
+            'partners' => count($partnersRepo->findAll()),
+            'modules' => count($modulesRepo->findAll()),
         ]);
     }
 
