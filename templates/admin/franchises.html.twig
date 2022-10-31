@@ -1,36 +1,32 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Liste des franchise{% endblock %}
+{% block title %}Liste des franchises{% endblock %}
 
 {% block body %}
     <a href="{{ path('admin_index') }}" class="btn btn-success my-3">Retour au panel d'administration</a>
-    <h1 class="p-2 text-center fw-bold">Liste des franchise</h1>
+    <h1 class="p-2 text-center fw-bold">Liste des franchises</h1>
     <a href="{{ path('admin_nouvelle_franchise') }}" class="btn btn-primary my-3">Créer une nouvelle franchise</a>
-    <div class="flex-nowrap">
+    <div class="d-flex justify-content-around flex-wrap container mt-3">
         {% for franchise in franchises %}
-            <div class="card col-md-4 shadow py-3 mb-5 bg-body rounded">
-                {# <div class="row g-0"> #}
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ franchise.name }}</h5>
-                            <p class="card-text">{{ franchise.email }}</p>
-                            <p class="card-text">
-                                <small class="">
-                                    {% if franchise.isActivate == 0 %}
-                                        <p class="badge text-bg-danger">Non activée</p>
-                                    {% else %}
-                                        <p class="badge text-bg-success">Activée</p>
-                                    {% endif %}
-                                </small>
-                            </p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-around">
-                            <a href="{{ path('admin_modifier_franchise', {'id': franchise.id}) }}" class="btn btn-warning">Modifier</a>
-                            <a href="{{ path('admin_supprimer_franchise', {'id': franchise.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ franchise.name }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                            <a href="#" class="btn btn-success">Voir la fiche</a>
-                        </div>
-                    </div>
+            <div class="card mx-auto mb-3 shadow" style="width: 24rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ franchise.name }}</h5>
+                    <p class="card-text">{{ franchise.email }}</p>
+                    <p class="card-text">
+                        <small class="">
+                            {% if franchise.isActivate == 0 %}
+                                <p class="badge text-bg-danger">Non activée</p>
+                            {% else %}
+                                <p class="badge text-bg-success">Activée</p>
+                            {% endif %}
+                        </small>
+                    </p>
                 </div>
+                <div class="card-footer d-flex justify-content-around">
+                    <a href="{{ path('admin_modifier_franchise', {'id': franchise.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('admin_supprimer_franchise', {'id': franchise.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ franchise.name }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
+                    <a href="#" class="btn btn-success">Voir la fiche</a>
+                </div>>
             </div>
         {% endfor %}
     </div>

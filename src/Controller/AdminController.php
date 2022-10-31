@@ -9,10 +9,11 @@ use App\Entity\Franchise;
 use App\Form\NewUserType;
 use App\Form\EditUserType;
 use App\Form\NewModuleType;
+use App\Form\EditModuleType;
 use App\Form\NewPartnerType;
+use App\Form\EditPartnerType;
 use App\Form\NewFranchiseType;
 use App\Form\EditFranchiseType;
-use App\Form\EditPartnerType;
 use App\Repository\UserRepository;
 use App\Repository\ModuleRepository;
 use App\Repository\PartnerRepository;
@@ -305,5 +306,28 @@ class AdminController extends AbstractController
         
         $this->addFlash('message', 'Module supprimé avec succès');
         return $this->redirectToRoute(('admin_utilisateurs'));
+    }
+
+    #[Route('module/edit/{id}', name:'modifier_module')]
+    public function editModule(Request $request, ManagerRegistry $doctrine, Module $module, $id)
+    {
+        $module = $doctrine->getRepository(Module::class);
+        $module = $module->find($id);
+
+        $form = $this->createForm(EditModuleType::class, $module);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form ->isValid())
+        {
+            $entityManager = $doctrine->getManager();
+            $entityManager->persist($module);
+            $entityManager->flush();
+
+            $this->addFlash('message', 'Module modifiée avec succès');
+            return $this->redirectToRoute("admin_modules");
+        }
+        return $this->render('admin/editmodule.html.twig', [
+            "moduleForm" => $form->createview(),
+        ]); 
     }
 }

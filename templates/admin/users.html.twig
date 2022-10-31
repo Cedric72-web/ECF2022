@@ -6,39 +6,30 @@
     <a href="{{ path('admin_index') }}" class="btn btn-success my-3">Retour au panel d'administration</a>
     <h1 class="p-2 text-center fw-bold">Liste des utilisateurs</h1>
     <a href="{{ path('admin_nouvel_utilisateur') }}" class="btn btn-primary my-3">Créer un nouvel utilisateur</a>
-    <div class="flex-nowrap">
+    <div class="d-flex justify-content-around flex-wrap container mt-3">
         {% for user in users %}
-            <div class="card col-md-4 shadow py-3 mb-5 bg-body rounded">
-                {# <div class="row g-0"> #}
-                    <div class="col-md-12">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ user.username }}</h5>
-                            <p class="card-text">{{ user.email }}</p>
-                            <p class="card-text">
-                                <small class="">
-                                    {% for role in user.roles %}
-                                        {% if  role == "ROLE_PARTNER" %}
-                                            <p class=" badge text-bg-info text-center">Structure</p>
-                                        {% elseif  role == "ROLE_FRANCHISE" %}
-                                            <p class="badge text-bg-primary">Franchise</p>
-                                        {% elseif  role == "ROLE_ADMIN" %}
-                                            <p class="badge text-bg-dark">Administrateur</p>
-                                        {% endif %}
-                                    {% endfor %}
-                                    {# {% if user.isActivate == 0 %}
-                                        <p class="badge textbg--danger">Non activée</p>
-                                    {% else %}
-                                        <p class="badge textbg--success">Activée</p>
-                                    {% endif %} #}
-                                </small>
-                            </p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-around">
-                            <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
-                            <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ user.username }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                            <a href="#" class="btn btn-success">Voir la fiche</a>
-                        </div>
-                    </div>
+            <div class="card mx-auto mb-3 shadow" style="width: 24rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }}</h5>
+                    <p class="card-text">{{ user.email }}</p>
+                    <p class="card-text">
+                        <small class="">
+                            {% for role in user.roles %}
+                                {% if  role == "ROLE_PARTNER" %}
+                                    <p class=" badge text-bg-info text-center">Structure</p>
+                                {% elseif  role == "ROLE_FRANCHISE" %}
+                                    <p class="badge text-bg-primary">Franchise</p>
+                                {% elseif  role == "ROLE_ADMIN" %}
+                                    <p class="badge text-bg-dark">Administrateur</p>
+                                {% endif %}
+                            {% endfor %}
+                        </small>
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-around">
+                    <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ user.username }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
+                    <a href="#" class="btn btn-success">Voir fiche</a>
                 </div>
             </div>
         {% endfor %}
