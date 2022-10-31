@@ -1,7 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ franchise.name }}{% endblock %}
+{% block title %}{{ user.username }}{% endblock %}
 
 {% block body %}
-    <h1>Bonjour {{ franchise.name }}</h1>
+<div class="">
+    <h1 class="text-uppercase fw-bold py-5 text-center">Bonjour {{ user.username }}</h1>
+    <div class="col-8 mx-auto">
+        <div class="card border-success mb-3 col-6 mx-auto">
+            <div class="card-body">
+                <div class="card-title">
+                    <h2>Nom : {{ user.lastname }}</h2>
+                    <h2>Prénom : {{ user.firstname }}</h2>
+                </div>
+                <div class="card-text">
+                    <h3>Email : {{ user.email }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
