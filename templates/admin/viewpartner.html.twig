@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche de {{ partner.name }}{% endblock %}
+
+{% block body %}
+    <div class="col-lg-5 mx-auto">
+        <div class="col">
+            <h1 class="p-5 text-center fw-bold">Fiche de {{ partner.name }}</h1>
+            <h3 class="p-3 text-start fw-bold">Propriétaire : {{ partner.getOwner.username }}</h3>
+            <h4 class="p-3 text-start fw-bold">Propriétaire : {{ partner.getOwner.email }}</h4>
+        </div>
+        <div class="status col-lg-5 mx-auto">
+            <h5 class="p-3">Status:</h5>
+            {% if partner.isActivate == 0 %}
+                <p class="badge text-bg-danger">Non activée</p>
+                {# <p><a href="" class="btn btn-success">Demander l'activation</a></p> #}
+            {% else %}
+                <p class="badge text-bg-success">Activée</p>
+            {% endif %}
+        </div>
+        <a href="{{ path('admin_salles') }}" class="btn btn-success mt-3 mx-1">Retour à la liste des salles</a>
+    </div>
+{% endblock %}

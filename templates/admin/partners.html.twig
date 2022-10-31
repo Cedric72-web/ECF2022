@@ -25,7 +25,7 @@
                 <div class="card-footer d-flex justify-content-around">
                     <a href="{{ path('admin_modifier_salle', {'id': partner.id}) }}" class="btn btn-warning">Modifier</a>
                     <a href="{{ path('admin_supprimer_salle', {'id': partner.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ partner.name }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                    <a href="#" class="btn btn-success">Voir la fiche</a>
+                    <a href="{{ path('admin_voir_salle', {'id': partner.id}) }}" class="btn btn-success">Voir la fiche</a>
                 </div>
             </div>
         {% endfor %}

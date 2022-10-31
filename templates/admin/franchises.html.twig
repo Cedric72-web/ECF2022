@@ -25,10 +25,10 @@
                 <div class="card-footer d-flex justify-content-around">
                     <a href="{{ path('admin_modifier_franchise', {'id': franchise.id}) }}" class="btn btn-warning">Modifier</a>
                     <a href="{{ path('admin_supprimer_franchise', {'id': franchise.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ franchise.name }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                    <a href="#" class="btn btn-success">Voir la fiche</a>
-                </div>>
+                    <a href="{{ path('admin_voir_franchise', {'id': franchise.id}) }}" class="btn btn-success">Voir la fiche</a>
+                </div>
             </div>
         {% endfor %}
     </div>
-    <script src="{{ asset('scripts/filterChoice.js') }}"></script>
+    {# <script src="{{ asset('scripts/filterChoice.js') }}"></script> #}
 {% endblock %}

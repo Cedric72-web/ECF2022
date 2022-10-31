@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche de {{ user.username }}{% endblock %}
+
+{% block body %}
+    <div class="col-lg-5 mx-auto">
+        <h1 class="p-5 text-center fw-bold">Fiche de {{ user.username }}</h1>
+        <h4 class="p-3 text-start fw-bold">Propriétaire : {{ user.email }}</h4>
+        <h5 class="text-start p-5 text-decoration-underline">Franchise(s) possédée(s) :</h5>
+        <div class="d-flex justify-content-around">
+            {% for franchise in franchises %}
+                <div class="card m-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ franchise.name }}</h5>
+                        {# <p class="card-text">{{ franchise.address }}</p>
+                        <p class="card-text">{{ franchise.zipcode }} {{ franchise.city }}</p> #}
+                    </div>
+                    <div class="card-footer">
+                        {% if franchise.isActivate == 0 %}
+                            <p class="badge text-bg-danger">Non activée</p>
+                            {# <p><a href="" class="btn btn-success">Demander l'activation</a></p> #}
+                        {% else %}
+                            <p class="badge text-bg-success">Activée</p>
+                        {% endif %}
+                        <br>
+                        <a href="{{ path('admin_voir_franchise', {'id': franchise.id}) }}" class="btn btn-primary">Voir la franchise</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <h5 class="text-start p-5 text-decoration-underline">Salle(s) possédée(s) :</h5>
+        <div class="d-flex justify-content-around">
+            {% for partner in partners %}
+                <div class="card m-3" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ partner.name }}</h5>
+                        <p class="card-text">{{ partner.address }}</p>
+                        <p class="card-text">{{ partner.zipcode }} {{ partner.city }}</p>
+                    </div>
+                    <div class="card-footer">
+                        {% if partner.isActivate == 0 %}
+                            <p class="badge text-bg-danger">Non activée</p>
+                            {# <p><a href="" class="btn btn-success">Demander l'activation</a></p> #}
+                        {% else %}
+                            <p class="badge text-bg-success">Activée</p>
+                        {% endif %}
+                        <br>
+                        <a href="{{ path('admin_voir_salle', {'id': partner.id}) }}" class="btn btn-primary">Voir la salle</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{{ path('admin_utilisateurs') }}" class="btn btn-success mt-3 mx-1">Retour à la liste des utilisateurs</a>
+    </div>
+{% endblock %}

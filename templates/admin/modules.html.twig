@@ -24,7 +24,6 @@
                 <div class="card-footer d-flex justify-content-around">
                     <a href="{{ path('admin_modifier_module', {'id': module.id}) }}" class="btn btn-warning">Modifier</a>
                     <a href="{{ path('admin_supprimer_module', {'id': module.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ module.name }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                    <a href="#" class="btn btn-success">Voir la fiche</a>
                 </div>
             </div>
         {% endfor %}

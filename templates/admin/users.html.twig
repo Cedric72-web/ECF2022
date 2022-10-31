@@ -6,9 +6,25 @@
     <a href="{{ path('admin_index') }}" class="btn btn-success my-3">Retour au panel d'administration</a>
     <h1 class="p-2 text-center fw-bold">Liste des utilisateurs</h1>
     <a href="{{ path('admin_nouvel_utilisateur') }}" class="btn btn-primary my-3">Créer un nouvel utilisateur</a>
+    {# <div class="d-flex justify-content-around my-5 formRadio">
+        <form method="POST" id="filters" class="form-check xs-form-check sm-form-check-inline">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" value="all" name="choice" type="radio" id="all">
+                <label class="form-check-label" for="switchUser">Voir tous les utilisateurs</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" value="franchises" name="choice" type="radio" id="franchises">
+                <label class="form-check-label" for="switchUser">Voir les franchises</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" value="partners" name="choice" type="radio" id="partners">
+                <label class="form-check-label" for="switchUser">Voir les salles</label>
+            </div>
+        </form>
+    </div> #}
     <div class="d-flex justify-content-around flex-wrap container mt-3">
         {% for user in users %}
-            <div class="card mx-auto mb-3 shadow" style="width: 24rem;">
+            <div class="card mx-auto mb-3 shadow {{user.roles[0]}}" style="width: 24rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{ user.username }}</h5>
                     <p class="card-text">{{ user.email }}</p>
@@ -16,7 +32,7 @@
                         <small class="">
                             {% for role in user.roles %}
                                 {% if  role == "ROLE_PARTNER" %}
-                                    <p class=" badge text-bg-info text-center">Structure</p>
+                                    <p class=" badge text-bg-info">Salle</p>
                                 {% elseif  role == "ROLE_FRANCHISE" %}
                                     <p class="badge text-bg-primary">Franchise</p>
                                 {% elseif  role == "ROLE_ADMIN" %}
@@ -29,9 +45,10 @@
                 <div class="card-footer d-flex justify-content-around">
                     <a href="{{ path('admin_modifier_utilisateur', {'id': user.id}) }}" class="btn btn-warning">Modifier</a>
                     <a href="{{ path('admin_supprimer_utilisateur', {'id': user.id}) }}" onclick="if(!confirm('Êtes vous sûr de vouloir supprimer {{ user.username }} ?')) { return false; }" class="btn btn-danger">Supprimer</a>
-                    <a href="#" class="btn btn-success">Voir fiche</a>
+                    <a href="{{ path('admin_voir_utilisateur', {'id': user.id}) }}" class="btn btn-success">Voir fiche</a>
                 </div>
             </div>
         {% endfor %}
     </div>
+    {# <script src="{{ asset('scripts/userFilterChoice.js') }}" defer></script> #}
 {% endblock %}

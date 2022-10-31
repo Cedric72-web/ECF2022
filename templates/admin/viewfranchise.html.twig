@@ -2,13 +2,13 @@
 
 {% block title %}Fiche de {{ franchise.name }}{% endblock %}
 
-{% block main %}
+{% block body %}
     <div class="col-lg-5 mx-auto">
         <h1 class="p-5 text-center fw-bold">Fiche de {{ franchise.name }}</h1>
         <h3 class="p-3 text-start fw-bold">Propriétaire : {{ franchise.getIdUser.username }}</h3>
         <h4 class="p-3 text-start fw-bold">Propriétaire : {{ franchise.getIdUser.email }}</h4>
         <h5 class="text-start p-5">Salle(s) possédée(s) :</h5>
-        <div class="d-flex justify-content-around my-5 formRadio">
+        {# <div class="d-flex justify-content-around my-5 formRadio">
             <form method="POST" class="form-check form-check-inline">
                 <input class="form-check-input" value="all" name="choicePartner" type="radio" id="allPartners">
                 <label class="form-check-label" for="switchActivatedPartner">Voir toutes les salles</label>
@@ -21,7 +21,7 @@
                 <input class="form-check-input" value="unactivated" name="choicePartner" type="radio" id="unactivatedPartner">
                 <label class="form-check-label" for="switchActivatedPartner">Voir les salles desactivées</label>
             </div>
-        </div>
+        </div> #}
         <div class="d-flex justify-content-around">
             {% for partner in partners %}
                 <div class="card m-3" style="width: 18rem;">
@@ -31,17 +31,18 @@
                         <p class="card-text">{{ partner.zipcode }} {{ partner.city }}</p>
                     </div>
                     <div class="card-footer">
-                        {% if partner.isIsActivate == 0 %}
-                            <p class="text-danger">Non activée</p>
-                            <p><a href="" class="btn btn-success">Demander l'activation</a></p>
+                        {% if partner.isActivate == 0 %}
+                            <p class="badge text-bg-danger">Non activée</p>
+                            {# <p><a href="" class="btn btn-success">Demander l'activation</a></p> #}
                         {% else %}
-                            <p class="text-success">Activée</p>
+                            <p class="badge text-bg-success">Activée</p>
                         {% endif %}
-                        {# <a href="{{ path('salle_voir_salle', {'id': partner.id}) }}" class="btn btn-primary">Voir la salle</a> #}
+                        <br>
+                        <a href="{{ path('admin_voir_salle', {'id': partner.id}) }}" class="btn btn-primary">Voir la salle</a>
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <a href="{{ path('admin_franchise') }}" class="btn btn-success mt-3 mx-1">Retour à la liste des franchise</a>
+        <a href="{{ path('admin_franchises') }}" class="btn btn-success mt-3 mx-1">Retour à la liste des franchise</a>
     </div>
 {% endblock %}

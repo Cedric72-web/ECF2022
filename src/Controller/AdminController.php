@@ -73,16 +73,15 @@ class AdminController extends AbstractController
     }
 
     #[Route('/franchise/view/{id}', name: 'voir_franchise')]
-    public function viewFranchise(Franchise $franchise, PartnerRepository $repository, Request $request)
+    public function viewFranchise(Franchise $franchise, $id, ManagerRegistry $doctrine)
     {
-        $status = $request->request->get('choicePartner');
-        if ($status) {
-            $partners = $repository->findByStatus($status);
-        }
-        $partners = $repository->findById($franchise);
+        $franchise = $doctrine->getRepository(Franchise::class);
+        $franchise = $franchise->find($id);
+        $partners = $franchise->getPartners();
+
         return $this->render('admin/viewfranchise.html.twig', [
             'franchise' => $franchise,
-            'partners' => $partners
+            'partners' => $partners,
         ]);
     }
     
@@ -134,7 +133,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('user/new', name: 'nouvel_utilisateur')]
+    #[Route('/user/new', name: 'nouvel_utilisateur')]
     public function newUser(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $userPasswordHasher):Response
     {
         $user = new User($userPasswordHasher);
@@ -158,7 +157,21 @@ class AdminController extends AbstractController
         ]);        
     }
 
-    #[Route('user/edit/{id}', name:'modifier_utilisateur')]
+    #[Route('/user/view/{id}', name:'voir_utilisateur')]
+    public function viewUser(ManagerRegistry $doctrine, User $user, $id)
+    {
+        $user = $doctrine->getRepository(User::class);
+        $user = $user->find($id);
+        $partners = $user->getPartners();
+
+        return $this->render('admin/viewuser.html.twig', [
+            'user' => $user,
+            'partners' => $partners,
+            'franchises' => $user->getFranchises(),
+        ]);
+    }
+
+    #[Route('/user/edit/{id}', name:'modifier_utilisateur')]
     public function editUser(Request $request, ManagerRegistry $doctrine, User $user, $id)
     {
         $user = $doctrine->getRepository(User::class);
@@ -227,7 +240,7 @@ class AdminController extends AbstractController
         ]);
     }
     
-    #[Route('partner/edit/{id}', name:'modifier_salle')]
+    #[Route('/partner/edit/{id}', name:'modifier_salle')]
     public function editPartner(Request $request, ManagerRegistry $doctrine, Partner $partner, $id)
     {
         $partner = $doctrine->getRepository(Partner::class);
@@ -248,6 +261,19 @@ class AdminController extends AbstractController
         return $this->render('admin/editpartner.html.twig', [
             "partnerForm" => $form->createview(),
         ]); 
+    }
+
+    #[Route('/partner/view/{id}', name:'voir_salle')]
+    public function viewPartner(Partner $partner, $id, ManagerRegistry $doctrine)
+    {
+        $partner = $doctrine->getRepository(Partner::class);
+        $partner = $partner->find($id);
+        $user = $partner->getOwner();
+
+        return $this->render('admin/viewpartner.html.twig', [
+            'partner' => $partner,
+            'user' => $user,
+        ]);
     }
     
     #[Route('/partner/delete/{id}', name: 'supprimer_salle')]
@@ -273,7 +299,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('module/new', name: 'nouveau_module')]
+    #[Route('/module/new', name: 'nouveau_module')]
     public function newModule(Request $request, ManagerRegistry $doctrine):Response
     {
         $module = new Module;
@@ -308,7 +334,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute(('admin_utilisateurs'));
     }
 
-    #[Route('module/edit/{id}', name:'modifier_module')]
+    #[Route('/module/edit/{id}', name:'modifier_module')]
     public function editModule(Request $request, ManagerRegistry $doctrine, Module $module, $id)
     {
         $module = $doctrine->getRepository(Module::class);
